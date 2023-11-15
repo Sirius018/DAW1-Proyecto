@@ -6,10 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.inventorygenius.model.Producto;
+import com.inventorygenius.model.Proveedor;
 import com.inventorygenius.repository.ICategoriaRepository;
 import com.inventorygenius.repository.IProductoRepository;
 import com.inventorygenius.repository.IProveedorRepository;
@@ -154,4 +156,7 @@ public class ProductoController {
 
 		return "Productos";
 	}
+	
+	
+	
 }

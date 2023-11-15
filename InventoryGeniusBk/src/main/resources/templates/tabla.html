@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Producto</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<link rel="stylesheet" href="pat h/to/font-awesome/css/font-awesome.min.css">
+
+</head>
+<body>
+
+	
+	
+	
+	
+	
+	
+	<div class="container">
+  <div class="mt-2">
+    <div class="container-fluid">
+      <table
+        class="table table-striped table-bordered mt-5"
+        id="tableMedicamentos"
+      >
+        <thead>
+          <tr>
+            <th scope="col"class="bg-success">Código</th>
+			<th scope="col"class="bg-success">Producto</th>
+			<th scope="col"class="bg-success">Proveedor</th>
+			<th scope="col"class="bg-success">Descripción</th>
+			<th scope="col"class="bg-success">Fecha Ingreso</th>
+			<th scope="col"class="bg-success">Fecha Salida</th>
+			<th scope="col"class="bg-success">Stock</th>
+			<th scope="col"class="bg-success">Categoria</th>
+			<th scope="col"class="bg-success"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="o : ${listaProducto}">
+            <td th:text="${o.cod_unico_prod}"></td>
+			<td th:text="${o.nombre_prod}"></td>
+			<td th:text="${o.cod_prov}"></td>
+			<td th:text="${o.descripcion_prod}"></td>
+			<td th:text="${o.fecha_ingreso}"></td>
+			<td th:text="${o.fecha_salida}"></td>
+			<td th:text="${o.stk_prod}"></td>
+			<td th:text="${o.cod_categoria}"></td>
+			<td>
+				<form action="/buscarproducto"  method="post">
+					<input type="hidden" name="cod_unico_prod" th:value="${o.cod_unico_prod}">
+					<button class="btn btn-primary">Seleccionar</button>
+				</form>
+			</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
+	<script th:src="@{/resources/datepicker/bootstrap-datepicker.js}"></script>     
+	<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+	<script src="https://kit.fontawesome.com/08aaa156fb.js" crossorigin="anonymous"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script src="https://kit.fontawesome.com/08aaa156fb.js" crossorigin="anonymous"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.js}"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.min.js}"></script>
+	
+	
+	
+	
+	<script>
+		
+		$('#tableMedicamentos').DataTable();
+		$(function() {
+			$('#usr1').datepicker({
+				'format': 'yyyy-mm-dd',
+				'autoclose': true
+			});
+	
+		});
+	</script>
+	
+	
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="../static/js/home.js"></script>
+</body>
+</html>

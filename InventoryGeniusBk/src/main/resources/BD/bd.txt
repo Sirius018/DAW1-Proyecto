@@ -1,8 +1,8 @@
 /* 14-11-23 */
 
-DROP DATABASE IF EXISTS bd_daw2023;
-CREATE DATABASE bd_daw2023;
-USE bd_daw2023;
+DROP DATABASE IF EXISTS ALACENA;
+CREATE DATABASE ALACENA;
+USE ALACENA;
 
 CREATE TABLE IF NOT EXISTS `Tipo` (
   `id_tip` int PRIMARY KEY,
@@ -123,6 +123,8 @@ insert into Rol values (1, 'Administrador',400), (2, 'usuario',300);
 INSERT INTO `empresa` VALUES (1,932802,'Innovatec Solutions','18076062221',NULL,'InnovatecSolutions@gmail.com','Av. Libertad, CalLt. 1',75,'(01)2022467','953030253'), (2,629230,'Elite Marketing Group','13813086703',NULL,'EliteMarketingGroup@gmail.com','Calle PrimaverMz. B Lt. 2',22,'(01)7830302','970831167'), (3,333871,'Blue Wave Technologies','17236143787',NULL,'BlueWaveTechnologies@gmail.com','Av. del Sol,Lt. 3',119,'(01)3533150','941749562'), (4,594859,'Nexus Consulting Services','19316246677',NULL,'NexusConsultingServices@gmail.com','Calle Mz. D Lt. 4',43,'(01)3401011','989367573'), (5,322816,'Apex Enterprises','10974619268',NULL,'ApexEnterprises@gmail.com','Av. Central, Calle 111 5',134,'(01)9505320','991459884'), (6,979057,'Skyline Software Solutions','15544476167',NULL,'SkylineSoftwareSolutions@gmail.com','Call222 Mz. F Lt. 6',134,'(01)3151288','980351786'), (7,295867,'Summit Industries','17477047808',NULL,'SummitIndustries@gmail.com','Av. Progreso, Calle 3 7',27,'(01)8888139','956057250'), (8,445447,'Quantum Innovations','14133750798',NULL,'QuantumInnovations@gmail.com','Calle Flores, Av. 8',98,'(01)6176577','982188302'), (9,244088,'Stellar Management Group','15331899277',NULL,'StellarManagementGroup@gmail.com','Av. Espe I Lt. 9',25,'(01)6703326','959520712'); 
 
 INSERT INTO `proveedores` (`cod_prov`, `nombre_prov`, `ruc_prov`, `correo_prov`, `direccion_prov`, `id_tip`, `id_pais`, `telefono_one_prov`, `telefono_two_prov`) VALUES (null,'Technova', '15282316985', 'Technova@gmail.com', 'Av. Maravilla, Calle 6767 Mz. QQQ Lt. 69', 200, 91, '985626555', '926778626'),(null,'Nexisys','11559284896','Nexisys@gmail.com','Calle Ilusión, Av. ',200,46,'987434927','901434423'),(null,'Alphatech','14066496267','Alphatech@gmail.com','Av. Imaginación, Calle ',200,141,'987581209','903003048'),(null,'Cognify','13928497483','Cognify@gmail.com','Calle Fantasía, Av. ',200,132,'988620598','933913413'),(null,'Novatek','16350631887','Novatek@gmail.com','Av. Magia, Calle ',200,103,'983585816','959844844'),(null,'Synthetix','10518005870','Synthetix@gmail.com','Calle Encanto, Av. ',100,22,'986991407','974720836'),(null,'Innovent','14263111895','Innovent@gmail.com','Av. Esperanza, Calle ',200,65,'986330284','907934297'),(null,'Mindware','13961938423','Mindware@gmail.com','Calle Victoria, Av. ',200,82,'981669528','960695142'),(null,'Intellisys','15545797619','Intellisys@gmail.com','Av. Alegría, Calle ',200,21,'989485994','900702210');
+
+
 
 INSERT INTO `productos` VALUES ('11111','Televisores pantalla plana','Ultima generación de TV plasma',1,'2023-11-02','2023-10-31',2,'C016'),('18814','LG Velvet','El LG Velvet es un elegante t polvo.',2,'2017-06-20','2029-02-19',841,'C001'),('21800','Monitores red full pluss','modelo 2024',1,'2023-11-14','2023-11-23',1,'C015'),('21861','ZTE Axon 30 Ultra','El ZTE Axonral.',3,'2009-02-26','2026-04-22',734,'C001'),('32535','Motorola Moto G Power','El Motorola Moto e.',2,'2010-08-13','2028-09-23',841,'C001'),('45513','Realme 8 Pro','El Realme 8 Pro cuenta ce.',3,'2019-07-10','2029-07-07',678,'C001'),('55555','TV Smatch','ultima generación ',1,'2023-11-16','2023-11-16',2,'C001'),('61675','Nokia 9 PureView','El Nokia 9drio y metal.',2,'2021-08-09','2027-11-19',500,'C001'),('64650','Oppo Find X3 Pro','El Oppo Find X3 Pro cu 2.0.',3,'2021-10-09','2026-11-26',691,'C001'),('64994','Sony Xperia 1 II','El Sony Xperia 1 IIo.',2,'2023-03-21','2021-02-27',609,'C001'),('78143','ASUS ROG Phone 5','El ASUS ROG Phone ua.',2,'2022-01-07','2031-08-04',863,'C001'),('90465','Xiaomi Redmi Note 10 Pro','El Xiaomle.',3,'2018-08-25','2023-09-01',674,'C001');
 
