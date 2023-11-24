@@ -1,8 +1,6 @@
-/* 14-11-23 */
-
-DROP DATABASE IF EXISTS ALACENA;
-CREATE DATABASE ALACENA;
-USE ALACENA;
+DROP DATABASE IF EXISTS BD_DAW2023;
+CREATE DATABASE BD_DAW2023;
+USE BD_DAW2023;
 
 CREATE TABLE IF NOT EXISTS `Tipo` (
   `id_tip` int PRIMARY KEY,
@@ -116,7 +114,11 @@ INSERT INTO `pais` VALUES (1,'Canadá '),(2,'Estados Unidos'),(3,'México'),(4,'
 
 INSERT INTO `categoria` VALUES ('C001','Teléfonos móviles','celulares'),('C002','Computadoras','laptops, computadoras de escritorio, tabletas'),('C003','Electrodomésticos','licuadoras, tostadoras, microondas'),('C004','Componentes e computadora','procesadores, tarjetas gráficas, placas base, memoria RAM'),('C005','Cámaras','cámaras digitales, cámaras de acción, cámaras de seguridad'),('C006','Electrónica de consumo','televisores, reproductores de DVD/Blu-ray, sistemas de sonido'),('C007','Dispositivos de almacenamiento','discos duros, unidades USB, tarjetas de memoria'),('C008','Videojuegos y consolas','consolas de videojuegos, controladores, juegos'),('C009','Audio y música','auriculares, altavoces, reproductores de música'),('C010','Dispositivos de realidad virtual','gafas de realidad virtual, controladores de movimiento'),('C011','Relojes inteligentes y dispositivos portátiles','smartwatches, rastreadores de fitness'),('C012','Sistemas de seguridad','cámaras de vigilancia, sistemas de alarma'),('C013','Energía solar y renovable','paneles solares, cargadores solares, luces solares'),('C014','Herramientas eléctricas','taladros, sierras eléctricas, lijadoras'),('C015','Electrodomésticos de cocina','neveras, lavadoras, lavavajillas'),('C016','Dispositivos de control remoto',' controles remotos universales, controles inteligentes para el hogar'),('C017','Dispositivos de seguimiento y localización',' GPS, rastreadores de mascotas, localizadores personales'),('C018','Dispositivos de comunicación',' routers, módems, teléfonos de voz por IP'),('C019','Dispositivos de impresión','impresoras, escáneres, impresoras 3D'),('C020','Electrónica automotriz','sistemas de entretenimiento para automóviles, sistemas de navegación, cámaras de retroceso'),('C021','Dispositivos de videoconferencia','cámaras web, sistemas de conferencias'),('C022','Dispositivos de sonido profesional',' mezcladoras de audio, amplificadores, altavoces de alta fidelidad'),('C023','Dispositivos de vigilancia y seguridad del hogar',' sensores de movimiento, sistemas de alarma, timbres con video'),('C024','Dispositivos de domótica','termostatos inteligentes, cerraduras electrónicas, luces inteligentes'),('C025','Electrodomésticos de cuidado personal','secadores de pelo, planchas para el cabello, afeitadoras eléctricas');
 
-insert into AccesoRol values (100, '/home/HomeAcount/listadoEmpresa'),(200, '/home/HomeAcount/listadoProducto'),(300, '/home/HomeAcount/listadoProducto'),(400, '/home/HomeAcount/eliminarElemento');
+insert into AccesoRol values 
+(100, '/home/HomeAcount/Proveedores'),
+(200, '/home/HomeAcount/Producto'),
+(300, '/home/HomeAcount/Empresa'),
+(400, '/home/HomeAcount/eliminarElemento');
 
 insert into Rol values (1, 'Administrador',400), (2, 'usuario',300);
 
@@ -129,9 +131,12 @@ INSERT INTO `proveedores` (`cod_prov`, `nombre_prov`, `ruc_prov`, `correo_prov`,
 INSERT INTO `productos` VALUES ('11111','Televisores pantalla plana','Ultima generación de TV plasma',1,'2023-11-02','2023-10-31',2,'C016'),('18814','LG Velvet','El LG Velvet es un elegante t polvo.',2,'2017-06-20','2029-02-19',841,'C001'),('21800','Monitores red full pluss','modelo 2024',1,'2023-11-14','2023-11-23',1,'C015'),('21861','ZTE Axon 30 Ultra','El ZTE Axonral.',3,'2009-02-26','2026-04-22',734,'C001'),('32535','Motorola Moto G Power','El Motorola Moto e.',2,'2010-08-13','2028-09-23',841,'C001'),('45513','Realme 8 Pro','El Realme 8 Pro cuenta ce.',3,'2019-07-10','2029-07-07',678,'C001'),('55555','TV Smatch','ultima generación ',1,'2023-11-16','2023-11-16',2,'C001'),('61675','Nokia 9 PureView','El Nokia 9drio y metal.',2,'2021-08-09','2027-11-19',500,'C001'),('64650','Oppo Find X3 Pro','El Oppo Find X3 Pro cu 2.0.',3,'2021-10-09','2026-11-26',691,'C001'),('64994','Sony Xperia 1 II','El Sony Xperia 1 IIo.',2,'2023-03-21','2021-02-27',609,'C001'),('78143','ASUS ROG Phone 5','El ASUS ROG Phone ua.',2,'2022-01-07','2031-08-04',863,'C001'),('90465','Xiaomi Redmi Note 10 Pro','El Xiaomle.',3,'2018-08-25','2023-09-01',674,'C001');
 
 INSERT INTO `usuario` (`cod_Usu`,`Usuario`, `password`, `codRol`) VALUES 
-(654654,'admin','admin',1),
-(987987,'Noob','asd',2),
-(321321,'midd','123',2);
+(654654,'admin','$2a$10$DkK/1Syvyk7XHqdb12iLg.jrlcd8fudBn.opcydRRgrU/ogJB3y9S',1),
+(987987,'Noob','$2a$10$D/hWqT.Ivh14e7WF6bBa0eJQIjk0kQ/3wxAx/7Mk6jomm5nbWTLzO',2),
+(321321,'midd','$2a$10$iApMwRLbt8DFVZrTYKS13ucUsQ9I4I09dC9MIPQCnV3F3qfB.ER4K',2);
+# admin 
+# 123
+# 000
 
 
 INSERT INTO `Empleado` (`nombreEmpleado`, `Apellido`, `cod_Usu`) VALUES 

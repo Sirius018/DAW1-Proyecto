@@ -144,8 +144,10 @@ public class ProductoController {
 		model.addAttribute("boton","Actualizar");
 		return "Productos";
 	}
+	
+	
 
-	@GetMapping("/home/HomeAcount/listadoProducto")
+	@GetMapping("/home/HomeAcount/Producto")
 	public String listarProductos(Model model) {
 		model.addAttribute("listaProducto", repoProducto.findAll());
 		model.addAttribute("lstCategoria", repoCategoria.findAll());

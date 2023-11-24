@@ -5,17 +5,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.inventorygenius.model.Empresa;
 import com.inventorygenius.model.Proveedor;
 import com.inventorygenius.repository.IPaisRepository;
 import com.inventorygenius.repository.IProveedorRepository;
 import com.inventorygenius.repository.ITipoRepository;
 
-import jakarta.persistence.NonUniqueResultException;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.OutputStream;
@@ -32,20 +29,11 @@ import net.sf.jasperreports.engine.JasperPrint;
 @Controller
 public class ProveedorController {
 
-	@Autowired
-	private IProveedorRepository repoProveedor;
-
-	@Autowired
-	private ITipoRepository repoTipo;
-
-	@Autowired
-	private IPaisRepository repoPais;
-
-	@Autowired
-	private DataSource dataSource; 
-	
-	@Autowired
-	private ResourceLoader resourceLoader; 
+	@Autowired private IProveedorRepository repoProveedor;
+	@Autowired private ITipoRepository repoTipo; 
+	@Autowired private IPaisRepository repoPais; 
+	@Autowired private DataSource dataSource;	
+	@Autowired private ResourceLoader resourceLoader; 
 	
 	
 	@GetMapping("/proveedor/listadopdf")
@@ -72,7 +60,7 @@ public class ProveedorController {
 	}
 	
 
-	@GetMapping("/home/HomeAcount/listadoProveedores")
+	@GetMapping("/home/HomeAcount/Proveedores")
 	public String listarProveedor(Model model) {
 
 		model.addAttribute("listaProveedor", repoProveedor.findAll());

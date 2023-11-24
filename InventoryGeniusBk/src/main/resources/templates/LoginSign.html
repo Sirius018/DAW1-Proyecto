@@ -9,6 +9,7 @@
 
     <title>InventoryGenius - Login</title>    
     <style>
+		
 		body {
     display: flex;
     align-items: center;
@@ -81,23 +82,25 @@ a { color: #069370; text-decoration: none; }
     <div class="container">
         <div class="user signiBx">
             <div class="formBx">
-                <form action="/home/Acount" method="post">
-                    <h2>Mi Cuenta</h2>
-                    <input id="userName" name="userName" type="text" placeholder="Usuario">
-                    <input id="PasswordUser" name="passwordUser" type="password" placeholder="Contraseña">
-                    <input type="submit" value="Acceder">
-                    <br>
-                    <!--<a href="/home/HomeAcount">navbar</a>-->
-                    <a href="/home">SALIR</a>
-                    <p class="singup">No tienes una cuenta? <a href="/home/NewAcount" onclick="toogleForm();">Crear</a></p>
-                </form>
+                <form action="/validarLogin" method="post">
+    <h2>Mi Cuenta</h2>
+    <input id="usuario" name="usuario" type="text" placeholder="Usuario">
+    <input id="contrasena" name="contrasena" type="password" placeholder="Contraseña">
+    <input type="submit" value="Acceder">
+    <br>
+    <a href="/home">SALIR</a>
+    <p class="singup">No tienes una cuenta? <a href="/home/NewAcount" onclick="toogleForm();">Crear</a></p>
+</form>
+
             </div>
         </div>
     </div>
-    <div id="smsAlert" th:class="${clase}" role="alert">
-        <p th:text="${mensaje}"></p>
-    </div>
+   <div th:class="${clase}" role="alert">
+    <p th:text="${mensaje}"></p>
+</div>
+
 </section>
+
 
 
 

@@ -179,9 +179,9 @@
 <nav>
     <ul>
       <li><a class="active" href="/home/HomeAcount"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-      <li><a href="/home/HomeAcount/listadoProveedores"><i class="fa fa-building" aria-hidden="true"></i> Proveedor</a></li>
-      <li><a href="/home/HomeAcount/listadoProducto"><i class="fa fa-archive" aria-hidden="true"></i> Productos</a></li>
-      <li><a href="/home/HomeAcount/listadoEmpresa"><i class="fa fa-briefcase" aria-hidden="true"></i> Empresa</a></li>
+      <li><a href="/home/HomeAcount/Proveedores"><i class="fa fa-building" aria-hidden="true"></i> Proveedor</a></li>
+      <li><a href="/home/HomeAcount/Producto"><i class="fa fa-archive" aria-hidden="true"></i> Productos</a></li>
+      <li><a href="/home/HomeAcount/Empresa"><i class="fa fa-briefcase" aria-hidden="true"></i> Empresa</a></li>
       <li><a href="/home/Acount"><i class="fa fa-sign-out" aria-hidden="true"></i> Login</a></li>
     </ul>
 </nav>
@@ -265,6 +265,7 @@
     <!--<button th:text="${boton}" type="submit" class="btn btn-success"></button>-->
     <a href="/proveedor/listadopdf" class="btn btn-success" target="_blank">PDF</a>
     <a href="/home/HomeAcount/listadoProveedores" class="btn btn-success">Nuevo</a>
+    
     </br>
 <div th:class="${clase}" role="alert" th:text="${mensaje}"></div>
 
@@ -340,6 +341,19 @@
 <script src="../static/js/home.js"></script>
 
 
+
+<!-- Control de Alertas -->
+<script th:inline="javascript" th:if="${MENSAJE!=null}">
+		//recuperar el atributo MENSAJE
+		var msj=/*[[${MENSAJE}]]*/
+		toastr.success(msj, toastr.options = {
+			"timeOut": "2000",
+			"positionClass " : " toast-top-right ",
+		});
+	</script>
+
+
+
 <script>
 	function validarStock() {
 		var stockInput = document.getElementById("inpstk");
@@ -365,6 +379,24 @@
 			});
 	
 		});
+		
+		
+		
+		//Eliminar//
+		$(document).on("click", ".btn-eliminar", function(event) {
+    event.preventDefault();
+
+    var cod = $(this).data("codigo");
+
+    alertify.confirm("SISTEMA", "¿Seguro de eliminar?",
+        function() {
+            window.location = "/proveedor/eliminarproveedor?cod_prov=" + cod;
+        },
+        function() {
+            alertify.error('Cancelado');
+        }).set('labels', {ok:'Sí', cancel:'No'});
+});
+
 </script>
 	
 	
