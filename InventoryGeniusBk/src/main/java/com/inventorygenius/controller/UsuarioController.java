@@ -82,13 +82,16 @@ public class UsuarioController {
 	
 	
 	/*
-	 * 	admin
+	 * User: adin
+	 * Pass: admin
 		$2a$10$DkK/1Syvyk7XHqdb12iLg.jrlcd8fudBn.opcydRRgrU/ogJB3y9S
 
-		123
+		User: midd
+		Pass: 123
 		$2a$10$D/hWqT.Ivh14e7WF6bBa0eJQIjk0kQ/3wxAx/7Mk6jomm5nbWTLzO
 
-		000
+		User: user
+		Pass: 000
 		$2a$10$iApMwRLbt8DFVZrTYKS13ucUsQ9I4I09dC9MIPQCnV3F3qfB.ER4K
 		*/
 

@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `Productos` (
 CREATE TABLE IF NOT EXISTS `Usuario` (
   `cod_Usu` INT PRIMARY KEY AUTO_INCREMENT,
   `Usuario` VARCHAR(50),
-  `password` VARCHAR(50),
+  `password` VARCHAR(100),
   `codRol` INT default null,
   FOREIGN KEY (`codRol`) REFERENCES `Rol` (`codRol`)
 );
@@ -132,8 +132,8 @@ INSERT INTO `productos` VALUES ('11111','Televisores pantalla plana','Ultima gen
 
 INSERT INTO `usuario` (`cod_Usu`,`Usuario`, `password`, `codRol`) VALUES 
 (654654,'admin','$2a$10$DkK/1Syvyk7XHqdb12iLg.jrlcd8fudBn.opcydRRgrU/ogJB3y9S',1),
-(987987,'Noob','$2a$10$D/hWqT.Ivh14e7WF6bBa0eJQIjk0kQ/3wxAx/7Mk6jomm5nbWTLzO',2),
-(321321,'midd','$2a$10$iApMwRLbt8DFVZrTYKS13ucUsQ9I4I09dC9MIPQCnV3F3qfB.ER4K',2);
+(987987,'midd','$2a$10$D/hWqT.Ivh14e7WF6bBa0eJQIjk0kQ/3wxAx/7Mk6jomm5nbWTLzO',2),
+(321321,'user','$2a$10$iApMwRLbt8DFVZrTYKS13ucUsQ9I4I09dC9MIPQCnV3F3qfB.ER4K',2);
 # admin 
 # 123
 # 000
