@@ -3,31 +3,39 @@ package com.inventorygenius.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.inventorygenius.model.Producto;
 import com.inventorygenius.model.Proveedor;
 import com.inventorygenius.repository.ICategoriaRepository;
 import com.inventorygenius.repository.IProductoRepository;
 import com.inventorygenius.repository.IProveedorRepository;
+import com.inventorygenius.service.ProductoService;
 
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.OutputStream;
+import java.util.Optional;
 
 import javax.sql.DataSource;
 
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
+//@RestController
 @Controller
 public class ProductoController {
 	/*crear los objetos para el repositorio*/
@@ -37,6 +45,7 @@ public class ProductoController {
 	@Autowired 	private ICategoriaRepository repoCategoria; 
 	@Autowired 	private DataSource dataSource;
 	@Autowired 	private ResourceLoader resourceLoader;
+	@Autowired private ProductoService produServ;
 
 	@GetMapping("/producto/listadopdf")
 	public void reporteProducto(HttpServletResponse response) {
@@ -62,34 +71,6 @@ public class ProductoController {
 	}
 
 
-	/*@PostMapping("/producto/guardar")
-	public String guardarProducto(@ModelAttribute Producto producto, Model model) {
-	    model.addAttribute("boton", "Registrar");
-	    try {
-	        if (repoProducto.existsByCodUnicoProd(producto.getCod_unico_prod())) {
-	            // Si el código único ya existe, muestra un mensaje de error
-	            model.addAttribute("mensaje", "El código único ya existe");
-	            model.addAttribute("clase", "alert alert-danger");
-	        } else {
-	            repoProducto.save(producto);
-	            model.addAttribute("mensaje", "Operación Exitosa");
-	            model.addAttribute("clase", "alert alert-success");
-	        }
-	        // Resto del código para agregar otros atributos al modelo y retornar la vista
-	        model.addAttribute("boton", "Registrar");
-	        model.addAttribute("listaProducto", repoProducto.findAll());
-	        model.addAttribute("lstCategoria", repoCategoria.findAll());
-	        model.addAttribute("lstProveedor", repoProveedor.findAll());
-	    } catch (Exception e) {
-	        // Manejar la excepción
-	        model.addAttribute("listaProducto", repoProducto.findAll());
-	        model.addAttribute("lstCategoria", repoCategoria.findAll());
-	        model.addAttribute("lstProveedor", repoProveedor.findAll());
-	        model.addAttribute("mensaje", "No se pudo registrar");
-	        model.addAttribute("clase", "alert alert-danger");
-	    }
-	    return "Productos";
-	}*/
 
 	@PostMapping("/producto/guardar")
 	public String guardarProducto(@ModelAttribute Producto producto, @RequestParam("boton") String boton, Model model) {
@@ -140,7 +121,6 @@ public class ProductoController {
 		model.addAttribute("listaProducto", repoProducto.findAll());
 		model.addAttribute("lstCategoria", repoCategoria.findAll());
 		model.addAttribute("lstProveedor", repoProveedor.findAll());
-
 		model.addAttribute("boton","Actualizar");
 		return "Productos";
 	}
@@ -152,12 +132,36 @@ public class ProductoController {
 		model.addAttribute("listaProducto", repoProducto.findAll());
 		model.addAttribute("lstCategoria", repoCategoria.findAll());
 		model.addAttribute("lstProveedor", repoProveedor.findAll());
-
 		model.addAttribute("producto", new Producto());
 		model.addAttribute("boton","Registrar");
-
 		return "Productos";
 	}
+	
+	
+	
+	
+	
+	@PostMapping("/eliminar/producto")
+	public String eliminarProducto(@RequestParam("cod_unico_prod") String codUnicoProd, String boton,RedirectAttributes redirect, Model model) {
+		model.addAttribute("boton", boton);
+	    try {
+	        produServ.eliminarProductoPorCodUnicoProd(codUnicoProd);
+	        System.out.println("Se eliminó el producto con código único: " + codUnicoProd);
+	        redirect.addFlashAttribute("mensaje", "Producto eliminado exitosamente "+codUnicoProd);
+	        model.addAttribute("clase", "alert alert-success");
+	    } catch (DataIntegrityViolationException e) {
+	        System.out.println(e);
+	        System.out.println("No se puede eliminar el producto debido a restricciones de integridad "+codUnicoProd);
+	        redirect.addFlashAttribute("mensaje", "No se puede eliminar el producto debido a restricciones de integridad "+codUnicoProd);
+	        model.addAttribute("clase", "alert alert-danger");
+	    } catch (Exception ex) {
+	        System.out.println(ex);
+	        System.out.println("Error al intentar eliminar el producto "+codUnicoProd);
+	        //redirect.addFlashAttribute("MENSAJE", "Error al intentar eliminar el producto "+codUnicoProd);
+	    }
+	    return "redirect:/home/HomeAcount/Producto";
+	}
+
 	
 	
 	

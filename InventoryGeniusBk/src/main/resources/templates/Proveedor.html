@@ -267,7 +267,8 @@
     <a href="/home/HomeAcount/Proveedores" class="btn btn-success">Nuevo</a>
     
     </br>
-<div th:class="${clase}" role="alert" th:text="${mensaje}"></div>
+<div id="mensajeDiv" th:class="${clase}" role="alert" th:text="${mensaje}"></div>
+
 
 </form>
 
@@ -290,6 +291,7 @@
             <th scope="col" class="bg-success">Pais</th>
             <th scope="col" class="bg-success">Telefono</th>
             <th scope="col" class="bg-success"></th>
+            <th scope="col" class="bg-success"></th>
           </tr>
         </thead>
         <tbody>
@@ -306,6 +308,12 @@
                 <form action="/buscarproveedor"  method="post">
                     <input type="hidden" name="cod_prov" th:value="${pr.cod_prov}">
                     <button class="btn btn-primary">Seleccionar</button>
+                </form>
+            </td>
+            <td>
+                <form action="/eliminar/proveedor"  method="post">
+                    <input type="hidden" name="cod_prov" th:value="${pr.cod_prov}">
+                    <button class="btn btn-danger">Eliminar</button>
                 </form>
             </td>
           </tr>
@@ -342,15 +350,18 @@
 
 
 
-<!-- Control de Alertas -->
-<script th:inline="javascript" th:if="${MENSAJE!=null}">
-		//recuperar el atributo MENSAJE
-		var msj=/*[[${MENSAJE}]]*/
-		toastr.success(msj, toastr.options = {
-			"timeOut": "2000",
-			"positionClass " : " toast-top-right ",
-		});
-	</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var mensajeElement = document.getElementById('mensajeDiv');
+        if (mensajeElement && mensajeElement.textContent.trim() !== '') {
+            setTimeout(function () {                
+                mensajeElement.style.opacity = '0';
+                mensajeElement.style.height = '0';
+                mensajeElement.style.transition = 'height 0.5s ease, opacity 0.5s ease';
+            }, 3000); 
+        }
+    });
+</script>
 
 
 

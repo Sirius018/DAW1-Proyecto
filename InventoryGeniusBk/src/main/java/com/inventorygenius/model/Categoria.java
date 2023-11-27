@@ -13,4 +13,6 @@ public class Categoria {
 	public String cod_categoria;
 	public String categoria;
 	public String descripcion_cat;
+	
+	
 }

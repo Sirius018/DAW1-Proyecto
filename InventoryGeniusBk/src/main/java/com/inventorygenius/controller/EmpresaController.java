@@ -54,42 +54,6 @@ public class EmpresaController {
         }
     }
 
-/*
-    @PostMapping("/empresa/guardar")
-    public String guardarEmpresa(@ModelAttribute Empresa empresa, Model model ) {
-        model.addAttribute("boton","Registrar");
-        try {
-            // Verificar código único que existe en la base de datos
-            if(repoEmpresa.findByCodUnicoEmp(empresa.getCod_unico_emp()) != null) {
-                // Si código existe, muestra mensaje error
-                model.addAttribute("mensaje","El código único ya existe");
-                model.addAttribute("clase","alert alert-danger");
-            } 
-            // Verificar si RUC existe en la BD
-            else if(repoEmpresa.findByRucEmp(empresa.getRuc_emp()) != null) {
-                // Si RUC existe, muestra mensaje error
-                model.addAttribute("mensaje","El RUC ya existe");
-                model.addAttribute("clase","alert alert-danger");
-            } 
-            // Si ninguno salta error, registra empresa
-            else {
-                repoEmpresa.save(empresa);
-                model.addAttribute("mensaje","Operación Exitosa");
-                model.addAttribute("clase","alert alert-success");
-            }
-            model.addAttribute("boton","Registrar");
-            model.addAttribute("listaEmpresa", repoEmpresa.findAll());
-            model.addAttribute("lstPais", repoPais.findAll());
-        } catch (Exception e) {
-            // Manejar la excepción
-            model.addAttribute("listaEmpresa", repoEmpresa.findAll());
-            model.addAttribute("lstPais", repoPais.findAll());
-            model.addAttribute("mensaje","No se pudo registrar");
-            model.addAttribute("clase","alert alert-danger");
-        }
-        return "Empresa";
-    }*/
-
 
 
     
@@ -127,7 +91,6 @@ public class EmpresaController {
             model.addAttribute("mensaje", "No se pudo registrar");
             model.addAttribute("clase", "alert alert-danger");
         }
-
         return "Empresa";
     }
 

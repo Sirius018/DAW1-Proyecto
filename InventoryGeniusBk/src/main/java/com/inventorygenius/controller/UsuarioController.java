@@ -20,6 +20,7 @@ public class UsuarioController {
 	@Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	
+	
 	/*
     @PostMapping("/home/Acount")
     public String login(@RequestParam("userName") String userName,
@@ -79,6 +80,27 @@ public class UsuarioController {
 
 
 	
+	
+	@PostMapping("/home/NewAcount/Create")
+	public String registerNewUsuario(@RequestParam("userName") String userName,
+	                                 @RequestParam("passwordUser") String password,
+	                                 Model model) {
+	    // Verifica si ya existe un usuario con el mismo nombre de usuario
+	    if (repoUsuario.findByUsuario(userName) != null) {
+	        model.addAttribute("mensaje", "Ya existe un usuario con el mismo nombre de usuario");
+	        model.addAttribute("clase", "alert alert-danger");
+	        return "loginCreate";
+	    }
+
+	    // Crea un nuevo objeto Usuario y guarda los datos en la base de datos
+	    Usuario usuario = new Usuario();
+	    usuario.setUsuario(userName);
+	    usuario.setPassword(bCryptPasswordEncoder.encode(password)); 
+	    repoUsuario.save(usuario);
+	    model.addAttribute("mensaje", "Operación Exitosa");
+	    model.addAttribute("clase", "alert alert-success");
+	    return "loginCreate";
+	}
 	
 	
 	/*

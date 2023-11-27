@@ -11,8 +11,8 @@ import lombok.Data;
 @Table(name="Usuario")
 public class Usuario {
     @Id
-    @Column(name = "cod_order")
-    private int codOrder;
+    @Column(name = "cod_Usu")
+    private int codUsu;
 
     @Column(name = "Usuario")
     private String usuario;

@@ -1,5 +1,6 @@
 package com.inventorygenius.repository;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -9,4 +10,7 @@ public interface IProductoRepository extends CrudRepository<com.inventorygenius.
 	    boolean existsByCodUnicoProd(@Param("codUnicoProd") String codUnicoProd);
 
 
+	 @Modifying
+	 @Query("DELETE FROM Producto p WHERE p.cod_unico_prod = :codUnicoProd")
+	 void deleteByCodUnicoProd(@Param("codUnicoProd") String codUnicoProd);
 }

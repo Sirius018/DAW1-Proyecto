@@ -12,6 +12,7 @@ import com.inventorygenius.model.Proveedor;
 import com.inventorygenius.repository.IPaisRepository;
 import com.inventorygenius.repository.IProveedorRepository;
 import com.inventorygenius.repository.ITipoRepository;
+import com.inventorygenius.service.ProveedorService;
 
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -21,6 +22,8 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -33,7 +36,8 @@ public class ProveedorController {
 	@Autowired private ITipoRepository repoTipo; 
 	@Autowired private IPaisRepository repoPais; 
 	@Autowired private DataSource dataSource;	
-	@Autowired private ResourceLoader resourceLoader; 
+	@Autowired private ResourceLoader resourceLoader;
+	@Autowired private ProveedorService proveedorService; 
 	
 	
 	@GetMapping("/proveedor/listadopdf")
@@ -72,45 +76,7 @@ public class ProveedorController {
 
 		return "Proveedor";
 	}
-/*
-	@PostMapping("/proveedor/guardar")
-	public String guardarProveedor(@ModelAttribute Proveedor proveedor, Model model, RedirectAttributes redirect) {
-	    model.addAttribute("boton", "Registrar");
-
-	    try {
-	        // Verificar código único que existe en la base de datos
-	        if (repoProveedor.findByRucProv(proveedor.getCod_unico_prov()) != null) {
-	            // Si código existe, muestra mensaje de error
-	            model.addAttribute("mensaje", "El código único ya existe");
-	            model.addAttribute("clase", "alert alert-danger");
-	        } 
-	        // Verificar si RUC existe en la BD
-	        else if (repoProveedor.findByRucProv(proveedor.getRuc_prov()) != null) {
-	            // Si RUC existe, muestra mensaje de error
-	            model.addAttribute("mensaje", "El RUC ya existe");
-	            model.addAttribute("clase", "alert alert-danger");
-	        } 
-	        // Si ninguno salta error, registra proveedor
-	        else {
-	            repoProveedor.save(proveedor);
-	            model.addAttribute("mensaje", "Operación Exitosa");
-	            model.addAttribute("clase", "alert alert-success");
-	        }
-
-	        model.addAttribute("listaProveedor", repoProveedor.findAll());
-	        model.addAttribute("lstTipo", repoTipo.findAll());
-	        model.addAttribute("lstPais", repoPais.findAll());
-	    } catch (Exception e) {
-	        // Manejar la excepción
-	        model.addAttribute("listaProveedor", repoProveedor.findAll());
-	        model.addAttribute("lstTipo", repoTipo.findAll());
-	        model.addAttribute("lstPais", repoPais.findAll());
-	        model.addAttribute("mensaje", "No se pudo registrar");
-	        model.addAttribute("clase", "alert alert-danger");
-	    }
-
-	    return "Proveedor";
-	}*/
+	
 
 	@PostMapping("/proveedor/guardar")
     public String guardarProveedor(@ModelAttribute Proveedor proveedor, @RequestParam("boton") String boton, Model model, RedirectAttributes redirect) {
@@ -167,5 +133,31 @@ public class ProveedorController {
 
 	
 	
+	
+	@PostMapping("/eliminar/proveedor")
+	public String eliminarProveedor(@RequestParam("cod_prov") int codProv, String boton,RedirectAttributes redirect, Model model) {
+		 model.addAttribute("boton", boton);
+	    try {
+	        proveedorService.eliminarProveedorPorCod(codProv);
+	        System.out.println("Se eliminó el proveedor con cod_prov: " + codProv);
+	        redirect.addFlashAttribute("mensaje", "Proveedor eliminado correctamente " +codProv);
+	        model.addAttribute("boton", boton);
+	    } catch (DataIntegrityViolationException e) {
+	        System.out.println(e);
+	        System.out.println("No se puede eliminar el proveedor debido a restricciones de integridad con "+codProv);
+	        redirect.addFlashAttribute("mensaje", "No se puede eliminar el proveedor debido a restricciones de integridad "+codProv);
+	        model.addAttribute("boton", boton);
+	    } catch (Exception ex) {
+	        System.out.println(ex);
+	        redirect.addFlashAttribute("MENSAJE", "Error al intentar eliminar el proveedor "+codProv);	        
+	        model.addAttribute("clase", "alert alert-danger");
+	        model.addAttribute("boton", boton);
+	        System.out.println("Error al intentar eliminar el proveedor "+codProv);
+	    }
+	    return "redirect:/home/HomeAcount/Proveedores";
+	}
 
+
+	
+	
 }

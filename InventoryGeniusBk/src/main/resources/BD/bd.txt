@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
   `cod_Usu` INT PRIMARY KEY AUTO_INCREMENT,
   `Usuario` VARCHAR(50),
   `password` VARCHAR(100),
-  `codRol` INT default null,
+  `codRol` INT default 2,
   FOREIGN KEY (`codRol`) REFERENCES `Rol` (`codRol`)
 );
 
