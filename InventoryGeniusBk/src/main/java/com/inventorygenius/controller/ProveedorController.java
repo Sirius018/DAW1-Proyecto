@@ -79,42 +79,47 @@ public class ProveedorController {
 	
 
 	@PostMapping("/proveedor/guardar")
-    public String guardarProveedor(@ModelAttribute Proveedor proveedor, @RequestParam("boton") String boton, Model model, RedirectAttributes redirect) {
-        model.addAttribute("boton", boton);
+	public String guardarProveedor(@ModelAttribute Proveedor proveedor, @RequestParam("boton") String boton, Model model, RedirectAttributes redirect) {
+	    model.addAttribute("boton", boton);
 
-        try {
-            if (boton.equals("Registrar")) {
-                // botón Registrar
-                if (repoProveedor.findByRucProv(proveedor.getCod_unico_prov()) != null) {
-                    model.addAttribute("mensaje", "El código único ya existe");
-                    model.addAttribute("clase", "alert alert-danger");
-                } else if (repoProveedor.findByRucProv(proveedor.getRuc_prov()) != null) {
-                    model.addAttribute("mensaje", "El RUC ya existe");
-                    model.addAttribute("clase", "alert alert-danger");
-                } else {
-                    repoProveedor.save(proveedor);
-                    model.addAttribute("mensaje", "Operación Exitosa");
-                    model.addAttribute("clase", "alert alert-success");
-                }
-            } else if (boton.equals("Actualizar")) {
-                // botón Actualizar
-                repoProveedor.save(proveedor);
-                model.addAttribute("mensaje", "Operación Exitosa");
-                model.addAttribute("clase", "alert alert-success");
-            }
+	    try {
+	        if (boton.equals("Registrar")) {
+	            // botón Registrar
+	            if (repoProveedor.findByRucProv(proveedor.getCod_unico_prov()) != null) {
+	                model.addAttribute("mensaje", "El código único ya existe");
+	                model.addAttribute("clase", "alert alert-danger");
+	            } else if (repoProveedor.findByRucProv(proveedor.getRuc_prov()) != null) {
+	                model.addAttribute("mensaje", "El RUC ya existe");
+	                model.addAttribute("clase", "alert alert-danger");
+	            } else {
+	                repoProveedor.save(proveedor);
+	                model.addAttribute("mensaje", "Operación Exitosa");
+	                model.addAttribute("clase", "alert alert-success");
+	            }
+	        } else if (boton.equals("Actualizar")) {
+	            // botón Actualizar
+	            repoProveedor.save(proveedor);
+	            model.addAttribute("mensaje", "Operación Exitosa");
+	            model.addAttribute("clase", "alert alert-success");
 
-            model.addAttribute("listaProveedor", repoProveedor.findAll());
-            model.addAttribute("lstTipo", repoTipo.findAll());
-            model.addAttribute("lstPais", repoPais.findAll());
-        } catch (Exception e) {
-            model.addAttribute("listaProveedor", repoProveedor.findAll());
-            model.addAttribute("lstTipo", repoTipo.findAll());
-            model.addAttribute("lstPais", repoPais.findAll());
-            model.addAttribute("mensaje", "No se pudo registrar");
-            model.addAttribute("clase", "alert alert-danger");
-        }
-        return "Proveedor"; 
-    }
+	            // Redireccionamiento a la URL deseada
+	            redirect.addFlashAttribute("mensaje", "Operación Exitosa");
+	            redirect.addFlashAttribute("clase", "alert alert-success");
+	            return "redirect:/home/HomeAcount/Proveedores";
+	        }
+
+	        model.addAttribute("listaProveedor", repoProveedor.findAll());
+	        model.addAttribute("lstTipo", repoTipo.findAll());
+	        model.addAttribute("lstPais", repoPais.findAll());
+	    } catch (Exception e) {
+	        model.addAttribute("listaProveedor", repoProveedor.findAll());
+	        model.addAttribute("lstTipo", repoTipo.findAll());
+	        model.addAttribute("lstPais", repoPais.findAll());
+	        model.addAttribute("mensaje", "No se pudo registrar");
+	        model.addAttribute("clase", "alert alert-danger");
+	    }
+	    return "Proveedor"; 
+	}
 
 
 

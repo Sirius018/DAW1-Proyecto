@@ -283,12 +283,12 @@
           <tr th:each="o : ${listaProducto}">
             <td th:text="${o.cod_unico_prod}"></td>
 			<td th:text="${o.nombre_prod}"></td>
-			<td th:text="${o.cod_prov}"></td>
+			<td th:text="${o.objProveedor.nombre_prov}"></td>
 			<td th:text="${o.descripcion_prod}"></td>
 			<td th:text="${o.fecha_ingreso}"></td>
 			<td th:text="${o.fecha_salida}"></td>
 			<td th:text="${o.stk_prod}"></td>
-			<td th:text="${o.cod_categoria}"></td>
+			<td th:text="${o.objCategoria.categoria}"></td>
 			<td>
 				<form action="/buscarproducto"  method="post">
 					<input type="hidden" name="cod_unico_prod" th:value="${o.cod_unico_prod}">

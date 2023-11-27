@@ -73,45 +73,50 @@ public class ProductoController {
 
 
 	@PostMapping("/producto/guardar")
-	public String guardarProducto(@ModelAttribute Producto producto, @RequestParam("boton") String boton, Model model) {
-	    model.addAttribute("boton", boton);
+    public String guardarProducto(@ModelAttribute Producto producto, @RequestParam("boton") String boton, Model model, RedirectAttributes redirect) {
+        model.addAttribute("boton", boton);
 
-	    try {
-	        if (boton.equals("Registrar")) {
-	            // botón Registrar
-	            if (repoProducto.existsByCodUnicoProd(producto.getCod_unico_prod())) {
-	                model.addAttribute("mensaje", "El código único ya existe");
-	                model.addAttribute("clase", "alert alert-danger");
-	            } else {
-	                repoProducto.save(producto);
-	                model.addAttribute("mensaje", "Operación Exitosa");
-	                model.addAttribute("clase", "alert alert-success");
-	            }
-	        } else if (boton.equals("Actualizar")) {
-	            // botón Actualizar
-	            if (repoProducto.existsByCodUnicoProd(producto.getCod_unico_prod())) {
-	                repoProducto.save(producto);
-	                model.addAttribute("mensaje", "Producto actualizado");
-	                model.addAttribute("clase", "alert alert-success");
-	            } else {
-	                model.addAttribute("mensaje", "El código único no existe, no se puede actualizar");
-	                model.addAttribute("clase", "alert alert-danger");
-	            }
-	        }
+        try {
+            if (boton.equals("Registrar")) {
+                // botón Registrar
+                if (repoProducto.existsByCodUnicoProd(producto.getCod_unico_prod())) {
+                    model.addAttribute("mensaje", "El código único ya existe");
+                    model.addAttribute("clase", "alert alert-danger");
+                } else {
+                    repoProducto.save(producto);
+                    model.addAttribute("mensaje", "Operación Exitosa");
+                    model.addAttribute("clase", "alert alert-success");
+                }
+            } else if (boton.equals("Actualizar")) {
+                // botón Actualizar
+                if (repoProducto.existsByCodUnicoProd(producto.getCod_unico_prod())) {
+                    repoProducto.save(producto);
+                    model.addAttribute("mensaje", "Producto actualizado");
+                    model.addAttribute("clase", "alert alert-success");
 
-	        model.addAttribute("listaProducto", repoProducto.findAll());
-	        model.addAttribute("lstCategoria", repoCategoria.findAll());
-	        model.addAttribute("lstProveedor", repoProveedor.findAll());
-	    } catch (Exception e) {
-	        model.addAttribute("listaProducto", repoProducto.findAll());
-	        model.addAttribute("lstCategoria", repoCategoria.findAll());
-	        model.addAttribute("lstProveedor", repoProveedor.findAll());
-	        model.addAttribute("mensaje", "No se pudo registrar o actualizar");
-	        model.addAttribute("clase", "alert alert-danger");
-	    }
+                    // Redireccionamiento a la URL deseada
+                    redirect.addFlashAttribute("mensaje", "Producto actualizado");
+                    redirect.addFlashAttribute("clase", "alert alert-success");
+                    return "redirect:/home/HomeAcount/Producto";
+                } else {
+                    model.addAttribute("mensaje", "El código único no existe, no se puede actualizar");
+                    model.addAttribute("clase", "alert alert-danger");
+                }
+            }
 
-	    return "Productos";
-	}
+            model.addAttribute("listaProducto", repoProducto.findAll());
+            model.addAttribute("lstCategoria", repoCategoria.findAll());
+            model.addAttribute("lstProveedor", repoProveedor.findAll());
+        } catch (Exception e) {
+            model.addAttribute("listaProducto", repoProducto.findAll());
+            model.addAttribute("lstCategoria", repoCategoria.findAll());
+            model.addAttribute("lstProveedor", repoProveedor.findAll());
+            model.addAttribute("mensaje", "No se pudo registrar o actualizar");
+            model.addAttribute("clase", "alert alert-danger");
+        }
+
+        return "Productos";
+    }
 
 
 	@PostMapping("/buscarproducto")

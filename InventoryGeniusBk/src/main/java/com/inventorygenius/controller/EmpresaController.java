@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.inventorygenius.model.Empresa;
 import com.inventorygenius.repository.IEmpresaRepository;
@@ -58,7 +59,7 @@ public class EmpresaController {
 
     
     @PostMapping("/empresa/guardar")
-    public String guardarEmpresa(@ModelAttribute Empresa empresa, @RequestParam("boton") String boton, Model model) {
+    public String guardarEmpresa(@ModelAttribute Empresa empresa, @RequestParam("boton") String boton, Model model,RedirectAttributes redirect) {
         model.addAttribute("boton", boton);
 
         try {
@@ -80,6 +81,9 @@ public class EmpresaController {
                 repoEmpresa.save(empresa);
                 model.addAttribute("mensaje", "Operación Exitosa");
                 model.addAttribute("clase", "alert alert-success");
+                redirect.addFlashAttribute("mensaje", "Operación Exitosa");
+	            redirect.addFlashAttribute("clase", "alert alert-success");
+                return "redirect:/home/HomeAcount/Empresa";
             }
 
             model.addAttribute("boton", "Registrar");

@@ -289,7 +289,8 @@
             <th scope="col" class="bg-success">Direccion</th>
             <th scope="col" class="bg-success">Tipo</th>
             <th scope="col" class="bg-success">Pais</th>
-            <th scope="col" class="bg-success">Telefono</th>
+            <th scope="col" class="bg-success">Tele.. 1</th>
+            <th scope="col" class="bg-success">Tele.. 2</th>
             <th scope="col" class="bg-success"></th>
             <th scope="col" class="bg-success"></th>
           </tr>
@@ -301,8 +302,9 @@
             <td th:text="${pr.ruc_prov}"></td>
             <td th:text="${pr.correo_prov}"></td>
             <td th:text="${pr.direccion_prov}"></td>
-            <td th:text="${pr.id_tip}"></td>
-            <td th:text="${pr.id_pais}"></td>
+            <td th:text="${pr.objTipo.tipo}"></td>
+            <td th:text="${pr.objPais.nombre_pais}"></td>
+            <td th:text="${pr.telefono_one_prov}"></td>
             <td th:text="${pr.telefono_two_prov}"></td>
             <td>
                 <form action="/buscarproveedor"  method="post">
