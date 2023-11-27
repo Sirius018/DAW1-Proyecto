@@ -115,7 +115,9 @@ public class ProductoController {
             model.addAttribute("clase", "alert alert-danger");
         }
 
-        return "Productos";
+        //return "Productos";
+        return "redirect:/home/HomeAcount/Producto";
+
     }
 
 

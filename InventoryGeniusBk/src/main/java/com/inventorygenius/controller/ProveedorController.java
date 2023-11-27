@@ -95,6 +95,7 @@ public class ProveedorController {
 	                repoProveedor.save(proveedor);
 	                model.addAttribute("mensaje", "Operación Exitosa");
 	                model.addAttribute("clase", "alert alert-success");
+	                return "redirect:/home/HomeAcount/Proveedores";
 	            }
 	        } else if (boton.equals("Actualizar")) {
 	            // botón Actualizar
